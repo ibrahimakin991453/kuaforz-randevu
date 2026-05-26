@@ -1,0 +1,35 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Kadro (Staff): anyone can read, admin writes
+    match /staff/{staffId} {
+      allow read: if true;
+      allow create, update, delete: if request.auth != null;
+    }
+
+    // Onlar (Services): anyone can read, admin writes
+    match /services/{serviceId} {
+      allow read: if true;
+      allow create, update, delete: if request.auth != null;
+    }
+
+    // Randevular (Appointments): visitors can create & read, admin full access
+    match /randevular/{appointmentId} {
+      allow read: if true;
+      allow create: if true;
+      allow update, delete: if request.auth != null;
+    }
+
+    // Zaman kilitleri: internal collection, admin access
+    match /zamanKilitleri/{lockId} {
+      allow read, write: if request.auth != null;
+    }
+
+    // Admin ayarları: admin only
+    match /adminAyarlari/{settingId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null;
+    }
+  }
+}
