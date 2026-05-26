@@ -7,3 +7,6 @@ serviceAccountKey.json
 
 # Firebase cache
 .firebase/
+
+# OpenCode session data
+.omo/run-continuation/
