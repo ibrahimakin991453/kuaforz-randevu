@@ -3,7 +3,7 @@ services:
     name: kuaforz-randevu
     env: node
     plan: free
-    buildCommand: npm install && npm run tsc
+    buildCommand: npm install --include=dev && npm run tsc
     startCommand: npm start
     envVars:
       - key: PORT
